@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUSAFIR CAFE | Ek Cup Yaadon Ka</title>
+    <title>DEEKSHA CAFE | Your New Sanctuary</title>
     
     <!-- Retro Indian Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,16 +50,18 @@
             box-shadow: 0 0 50px rgba(0,0,0,1);
         }
 
+        /* 🖼️ [REPLACED] THEME BACKGROUND IMAGE */
         .cafe-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1541544741938-0af808871cc0?q=80&w=2069&auto=format&fit=crop'); 
+            background-image: url('cafe-theme.jpg'); 
             background-size: cover;
             background-position: center;
-            filter: sepia(0.4) contrast(1.1) brightness(0.8) saturate(1.2);
+            /* Minor vintage filter for consistency */
+            filter: sepia(0.2) contrast(1.1) brightness(0.9) saturate(1.1);
             z-index: 1;
         }
 
@@ -155,7 +157,9 @@
 
         .menu-hotspot { top: 50%; left: 20%; width: 10%; height: 25%; }
         .radio-hotspot { top: 65%; left: 70%; width: 12%; height: 15%; }
-        .chai-hotspot { top: 75%; left: 45%; width: 8%; height: 12%; }
+        
+        /* ☕ [POSITION RE-ALIGN] Adjust for new image layout */
+        .chai-hotspot { top: 40%; left: 45%; width: 15%; height: 15%; }
 
         .menu-modal {
             position: fixed;
@@ -185,9 +189,7 @@
             transform: scale(0.9) rotate(-2deg);
             transition: transform 0.4s ease;
             position: relative;
-            background-image: 
-                linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
-                linear-gradient(#eee .1em, transparent .1em);
+            background-image: linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px) , linear-gradient(#eee .1em, transparent .1em);
             background-size: 100% 1.2em;
         }
 
@@ -243,8 +245,8 @@
         }
 
         @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.85; text-shadow: 2px 2px 0px var(--vintage-red), 4px 4px 0px rgba(0,0,0,0.8), 0 0 10px rgba(255, 191, 0, 0.2); }
+            0% , 100% { opacity: 1; }
+            50% { opacity: 0.85; text-shadow: 2px 2px 0px var(--vintage-red) , 4px 4px 0px rgba(0,0,0,0.8) , 0 0 10px rgba(255, 191, 0, 0.2); }
             52% { opacity: 0.4; }
             54% { opacity: 1; }
         }
@@ -279,8 +281,8 @@
         <div class="grain-overlay"></div>
 
         <div class="signboard-container">
-            <h1 class="main-title">Deeksha Music Cafe</h1>
-            <p class="subtitle">🎞️ Have Coffee and Relax</p>
+            <h1 class="main-title">DEEKSHA SANCTUARY</h1>
+            <p class="subtitle">🎞️ Find Your Inner Peace</p>
         </div>
         
         <div class="hotspot menu-hotspot" data-label="View Menu" onclick="toggleMenu()"></div>
@@ -289,9 +291,10 @@
             <div class="music-waves" id="music-indicator">♫ Playing...</div>
         </div>
         
-        <div class="hotspot chai-hotspot" data-label="Garam Chai">
-            <div class="steam" style="animation: rise 2s infinite ease-in;"></div>
-            <div class="steam" style="animation: rise 2.5s infinite ease-in 0.5s;"></div>
+        <!-- ☕ [HOTSPOT UPDATED] label changed -->
+        <div class="hotspot chai-hotspot" id="coffee-hotspot" data-label="Garam Chai (Click me)">
+            <div class="steam" style="animation: rise 2s infinite ease-in; "></div>
+            <div class="steam" style="animation: rise 2.5s infinite ease-in 0.5s; "></div>
         </div>
     </div>
 
@@ -310,7 +313,6 @@
         </div>
     </div>
 
-    <!-- Audio Player with absolute path support -->
     <audio id="cafeAudio" loop preload="auto">
         <source src="music01.mp3" type="audio/mpeg">
     </audio>
@@ -338,7 +340,6 @@
                 indicator.style.display = 'none';
                 isPlaying = false;
             } else {
-                // Play promise handling to avoid browser blocking issues
                 var playPromise = audio.play();
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {
@@ -351,6 +352,20 @@
                 }
             }
         }
+
+        /* ☕ [NEW JAVASCRIPT] Dynamic Coffee Selection logic */
+        const coffeeList = [
+            "Espresso", "Cappuccino", "Latte", "Americano", "Macchiato", "Mocha",
+            "Turkish Coffee", "Flat White", "Irish Coffee", "Ristretto", "Doppio",
+            "Affogato", "Cortado", "Galao", "Caffe Bombon", "Nitro Cold Brew",
+            "Vietnamese Coffee", "Vienna Coffee", "Mexican Coffee", "Japanese Iced Coffee"
+        ];
+        
+        // Pick random coffee on page load
+        const randomCoffee = coffeeList[Math.floor(Math.random() * coffeeList.length)];
+        
+        // Update label of "Garam Chai" Hotspot to random coffee
+        document.getElementById('coffee-hotspot').setAttribute('data-label', randomCoffee);
     </script>
 </body>
 </html>
