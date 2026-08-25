@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +28,7 @@
         }
 
         body {
-            background-color: #000; /* Cinematic black background */
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,22 +42,20 @@
         .cinematic-frame {
             position: relative;
             width: 100vw;
-            height: 56.25vw; /* 16:9 Aspect Ratio */
+            height: 56.25vw;
             max-height: 100vh;
-            max-width: 177.78vh; /* 16:9 Aspect Ratio */
+            max-width: 177.78vh;
             background-color: #111;
             overflow: hidden;
             box-shadow: 0 0 50px rgba(0,0,0,1);
         }
 
-        /* MAIN BACKGROUND IMAGE - REPLACE THE URL HERE */
         .cafe-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* REPLACE THE URL BELOW WITH YOUR UPLOADED IMAGE */
             background-image: url('https://images.unsplash.com/photo-1541544741938-0af808871cc0?q=80&w=2069&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
@@ -66,7 +63,6 @@
             z-index: 1;
         }
 
-        /* Film Grain & Dust Overlay */
         .grain-overlay {
             position: absolute;
             top: 0;
@@ -79,7 +75,6 @@
             mix-blend-mode: overlay;
         }
 
-        /* Cinematic Vignette (Dark Edges) */
         .vignette {
             position: absolute;
             top: 0;
@@ -91,7 +86,6 @@
             z-index: 9;
         }
 
-        /* Hand-painted Signboard */
         .signboard-container {
             position: absolute;
             top: 10%;
@@ -108,7 +102,6 @@
             color: var(--amber-glow);
             letter-spacing: 2px;
             margin-bottom: -10px;
-            /* Handpainted 3D effect */
             text-shadow: 
                 2px 2px 0px var(--vintage-red),
                 4px 4px 0px rgba(0,0,0,0.8),
@@ -123,7 +116,6 @@
             opacity: 0.9;
         }
 
-        /* Interactive Hotspots */
         .hotspot {
             position: absolute;
             cursor: pointer;
@@ -161,13 +153,10 @@
             opacity: 1;
         }
 
-        /* POSITION THESE BASED ON YOUR IMAGE */
-        /* Currently set to demo positions - adjust top/left % as needed */
         .menu-hotspot { top: 50%; left: 20%; width: 10%; height: 25%; }
         .radio-hotspot { top: 65%; left: 70%; width: 12%; height: 15%; }
         .chai-hotspot { top: 75%; left: 45%; width: 8%; height: 12%; }
 
-        /* Handwritten Paper Menu Modal */
         .menu-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -196,7 +185,6 @@
             transform: scale(0.9) rotate(-2deg);
             transition: transform 0.4s ease;
             position: relative;
-            /* Grunge paper texture */
             background-image: 
                 linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
                 linear-gradient(#eee .1em, transparent .1em);
@@ -243,7 +231,6 @@
             padding: 5px 0;
         }
 
-        /* Steam Animation for Chai Hotspot */
         .steam {
             position: absolute;
             top: -20px;
@@ -255,7 +242,6 @@
             opacity: 0;
         }
 
-        /* Animations */
         @keyframes flicker {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.85; text-shadow: 2px 2px 0px var(--vintage-red), 4px 4px 0px rgba(0,0,0,0.8), 0 0 10px rgba(255, 191, 0, 0.2); }
@@ -268,7 +254,6 @@
             100% { transform: translateY(-50px) scale(3); opacity: 0; }
         }
 
-        /* Audio Indicator */
         .music-waves {
             display: none;
             position: absolute;
@@ -284,27 +269,19 @@
             50% { opacity: 1; }
             100% { opacity: 0.5; }
         }
-
     </style>
 </head>
 <body>
 
     <div class="cinematic-frame">
-        <!-- BACKGROUND IMAGE -->
         <div class="cafe-bg"></div>
-        
-        <!-- TEXTURES & LIGHTING -->
         <div class="vignette"></div>
         <div class="grain-overlay"></div>
 
-        <!-- MAIN SIGNBOARD -->
         <div class="signboard-container">
             <h1 class="main-title">Deeksha Music Cafe</h1>
             <p class="subtitle">🎞️ Have Coffee and Relax</p>
         </div>
-
-        <!-- INTERACTIVE HOTSPOTS -->
-        <!-- Adjust the top/left percentages in CSS to match the items in your uploaded image -->
         
         <div class="hotspot menu-hotspot" data-label="View Menu" onclick="toggleMenu()"></div>
         
@@ -318,11 +295,10 @@
         </div>
     </div>
 
-    <!-- MENU MODAL -->
     <div class="menu-modal" id="menuModal">
         <div class="menu-paper">
             <div class="close-btn" onclick="toggleMenu()">X</div>
-            <h2 class="menu-title">	Chilling Menu</h2>
+            <h2 class="menu-title">Chilling Menu</h2>
             <ul class="menu-items">
                 <li><span>Healing Chai</span> <span>₹5</span></li>
                 <li><span>Love Maska</span> <span>₹12</span></li>
@@ -334,28 +310,24 @@
         </div>
     </div>
 
-    <!-- Background Audio (Placeholder for a 90s track) -->
-    <audio id="cafeAudio" loop>
-        <!-- Add a royalty free lo-fi or 90s bollywood mp3 url here -->
+    <!-- Audio Player with absolute path support -->
+    <audio id="cafeAudio" loop preload="auto">
         <source src="music01.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Menu Toggle Logic
         const menuModal = document.getElementById('menuModal');
         
         function toggleMenu() {
             menuModal.classList.toggle('active');
         }
 
-        // Close menu if clicking outside the paper
         menuModal.addEventListener('click', function(e) {
             if (e.target === menuModal) {
                 toggleMenu();
             }
         });
 
-        // Radio Toggle Logic
         const audio = document.getElementById('cafeAudio');
         const indicator = document.getElementById('music-indicator');
         let isPlaying = false;
@@ -364,11 +336,20 @@
             if (isPlaying) {
                 audio.pause();
                 indicator.style.display = 'none';
+                isPlaying = false;
             } else {
-                audio.play();
-                indicator.style.display = 'block';
+                // Play promise handling to avoid browser blocking issues
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        indicator.style.display = 'block';
+                        isPlaying = true;
+                    }).catch(error => {
+                        console.log("Audio play error:", error);
+                        alert("Audio play karne me dikkat ho rahi hai. Kripya check karein ki 'music01.mp3' file sahi se commit hui hai ya nahi.");
+                    });
+                }
             }
-            isPlaying = !isPlaying;
         }
     </script>
 </body>
