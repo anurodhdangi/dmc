@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEEKSHA MUSIC CAFE | Ek Cup Yaadon Ka</title>
+    <title>MUSAFIR CAFE | Ek Cup Yaadon Ka</title>
     
     <!-- Retro Indian Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +50,6 @@
             box-shadow: 0 0 50px rgba(0,0,0,1);
         }
 
-        /* ORIGINAL WORKING ONLINE BACKGROUND */
         .cafe-bg {
             position: absolute;
             top: 0;
@@ -186,7 +185,9 @@
             transform: scale(0.9) rotate(-2deg);
             transition: transform 0.4s ease;
             position: relative;
-            background-image: linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px), linear-gradient(#eee .1em, transparent .1em);
+            background-image: 
+                linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+                linear-gradient(#eee .1em, transparent .1em);
             background-size: 100% 1.2em;
         }
 
@@ -309,6 +310,7 @@
         </div>
     </div>
 
+    <!-- Audio Player with absolute path support -->
     <audio id="cafeAudio" loop preload="auto">
         <source src="music01.mp3" type="audio/mpeg">
     </audio>
@@ -336,6 +338,7 @@
                 indicator.style.display = 'none';
                 isPlaying = false;
             } else {
+                // Play promise handling to avoid browser blocking issues
                 var playPromise = audio.play();
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {
@@ -343,6 +346,7 @@
                         isPlaying = true;
                     }).catch(error => {
                         console.log("Audio play error:", error);
+                        alert("Audio play karne me dikkat ho rahi hai. Kripya check karein ki 'music01.mp3' file sahi se commit hui hai ya nahi.");
                     });
                 }
             }
